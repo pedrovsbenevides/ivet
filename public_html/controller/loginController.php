@@ -47,7 +47,7 @@ class LoginController{
             $usuario = $loginDao->login($login, $senha);
          
 
-          //echo "string: ".$usuario[0];
+          var_dump($usuario);
             //redirecionando para pagina conforme o tipo do usuário
             if ($usuario[0]['perfil'] == 1) {
                header("Location:../view/pesquisa2.php");

@@ -17,13 +17,16 @@ class Conexao{
 	   // $this->senha = "";
 	   
 	   
-	   $this->servidor = "db.painel-web.uneb.br";
-	   $this->banco = "ivetune_geral";
-	   $this->usuario = "ivetune_user";
-	   $this->senha = "dB@gfctasi1cfcf";
+	//    $this->servidor = "db.painel-web.uneb.br";
+	//    $this->banco = "ivetune_geral";
+	//    $this->usuario = "ivetune_user";
+	//    $this->senha = "dB@gfctasi1cfcf";
 
+		$this->servidor = "ivet_db";
+	   	$this->banco = "ivetune_geral";
+	   	$this->usuario = "user";
+	   	$this->senha = "pass";
 
-		
 		try {
            $this->pdo = new PDO("mysql:host=".$this->servidor.";dbname=".$this->banco, $this->usuario, $this->senha);
 

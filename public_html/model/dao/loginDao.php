@@ -3,6 +3,8 @@
 require_once("conexao.php");
 
 class LoginDao{
+    private $con;
+    private $pdo;
     
         public function __construct(){
             $this->con = new Conexao();
