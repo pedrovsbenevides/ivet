@@ -1,4 +1,4 @@
-FROM php:7.2-apache
+FROM php:8.1-apache
 COPY public_html/ /var/www/html/
 RUN docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd \
     && docker-php-ext-configure mysqli --with-mysqli=mysqlnd \
