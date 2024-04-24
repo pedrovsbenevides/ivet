@@ -28,7 +28,7 @@ services:
         volumes:
             - ./public_html:/var/www/html
         ports:
-            - 80:80
+            - 8000:80
         links:
             - mysql
 volumes:
