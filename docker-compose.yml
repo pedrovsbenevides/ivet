@@ -1,35 +1,41 @@
 version: '3'
 services:
-    mysql:
-        container_name: ivet_db
-        image: mysql:8.3
-        ports:
-            - 3306:3306
-        restart: always
-        volumes:
-            - ./db:/var/lib/mysql
-            - ./ivetune_geral:/docker-entrypoint-initdb.d
-        command: 
-            [
-                --default-authentication-plugin=mysql_native_password
-            ]
-        environment: 
-            MYSQL_ROOT_PASSWORD: secret
-            MYSQL_DATABASE: ivetune_geral
-            MYSQL_USER: user
-            MYSQL_PASSWORD: pass
 
-    php:
-        build:
-            context: .
-            dockerfile: Dockerfile
-        depends_on:
-            - mysql
-        volumes:
-            - ./public_html:/var/www/html
-        ports:
-            - 80:80
-        links:
-            - mysql
+  app:
+    container_name: ivet
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./public_html:/var/www/html
+    ports:
+      - 8002:80
+    depends_on:
+      - db
+    networks:
+      - internal
+
+  db:
+    container_name: ivet_db
+    image: mysql:8.3
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: '${MYSQL_ROOT_PASSWORD}'
+      MYSQL_DATABASE: '${MYSQL_DATABASE}'
+      MYSQL_USER: '${MYSQL_USER}'
+      MYSQL_PASSWORD: '${MYSQL_PASSWORD}'
+    command: [ --default-authentication-plugin=mysql_native_password ]
+    ports:
+      - 3307:3306
+    volumes:
+      - ./db:/var/lib/mysql
+      - ./ivetune_geral:/docker-entrypoint-initdb.d
+    networks:
+      - internal
+
+networks:
+  internal:
+    external: true
+
 volumes:
-    mysql_data:
+  db:
